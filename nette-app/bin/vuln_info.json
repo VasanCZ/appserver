@@ -1,0 +1,128 @@
+{
+    "LUCKY13": {
+        "description":"Byl použit mód CBC při šifrování.",
+        "html":"https://nvd.nist.gov/vuln/detail/CVE-2013-0169",
+        "htmlText":"CVE-2013-0169 Detail (NIST)"
+    },
+    "HSTS": { 
+        "description":"Nedetekováno - potenciální útok MITM.",
+        "html":"https://www.ssls.cz/hsts.html",
+        "htmlText":"Konfigurace HSTS"
+    },
+    "HTTPS": {
+        "description":"Server není zabezpečen SSL/TLS spojením.",
+        "html":"https://www.websecurity.digicert.com/security-topics/what-is-ssl-tls-https",
+        "htmlText":"Informace o HTTPS"
+    },
+    "HTTP": {
+        "description":"Server má povolený nezabezpečený port 80. Hrozí potenciální odposlech spojení.",
+        "html":"https://www.namecheap.com/support/knowledgebase/article.aspx/9821/38/apache-redirect-to-https/",
+        "htmlText":"Jak přesměrovat na HTTPS (Apache)"
+    },
+    "21": {
+        "description":"Server má otevřený port 21 (FTP). Potenciální útok uhádnutím hesla. Doporučeno port zakázat nebo nastavit jiný pro FTP přístup.",
+        "html":"",
+        "htmlText":""
+    },
+    "22": {
+        "description":"Server má otevřený port 22 (SSH). Potenciální útok uhádnutím hesla. Doporučeno port zakázat nebo nastavit jiný pro SSH přístup.",
+        "html":"",
+        "htmlText":""
+    },
+    "23": {
+        "description":"Server má otevřený port 23 (Telnet). Potenciální útok uhádnutím hesla. Doporučeno port zakázat nebo nastavit jiný pro Telnet přístup.",
+        "html":"",
+        "htmlText":""
+    },
+    "113": {
+        "description":"Server má otevřený port 113. Potenciální útok odposlechu identifikačních a autentizačních údajů.",
+        "html":"",
+        "htmlText":""
+    },
+    "3389": {
+        "description":"Server má otevřený port 3389 (RDP). Otevřený přístup ke vzdálené ploše. Doporučeno port zakázat nebo nastavit jiný pro vzdálený přístup.",
+        "html":"https://www.welivesecurity.com/2019/12/17/bluekeep-time-disconnect-rdp-internet/",
+        "htmlText":"Informace"
+    },
+    "Renegotiation": {
+        "description":"Server nepodporuje bezpečné opětovné vyjednávání.",
+        "html":"https://www.mcafee.com/blogs/enterprise/tips-securing-ssl-renegotiation/",
+        "htmlText":"Informace"
+    },
+    "Slabý klíč": {
+        "description":"Byl použit slabý veřejný klíč.",
+        "html":"https://www.keylength.com/en/4/",
+        "htmlText":"Doporučení pro délky klíčů (NIST)"
+    },
+    "SHA1": {
+        "description":"Byl použit slabý hash SHA1.",
+        "html":"https://csrc.nist.gov/News/2017/Research-Results-on-SHA-1-Collisions",
+        "htmlText":"Prolomený SHA1 (NIST)"
+    },
+    "Neplatný certifikát": {
+        "description":"Platnost certifikátu vypršela.",
+        "html":"https://docs.digicert.com/manage-certificates/renew-ssltls-certificate/",
+        "htmlText":"Obnova certifikátu (DigiCert)"
+    },
+    "RC": {
+        "description":"Byl použit slabý šifrovací algoritmus RC2 nebo RC4.",
+        "html":"https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final",
+        "htmlText":"Doporučení NIST pro TLS"
+    },
+    "MD5": {
+        "description":"Byl použit slabý hash MD5.",
+        "html":"https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final",
+        "htmlText":"Doporučení NIST pro TLS"
+    },
+    "Výměna klíče přes RSA": {
+        "description":"Výměna klíče proběhla pomocí RSA algoritmu.",
+        "html":"https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final",
+        "htmlText":"Doporučení NIST pro TLS"
+    },
+    "NULL": {
+        "description":"TLS spojení není šifrované.",
+        "html":"https://tools.ietf.org/html/rfc4785",
+        "htmlText":"RFC 4785"
+    },
+    "DES": {
+        "description":"Bylo použité slabé šifrování DES nebo 3DES.",
+        "html":"https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final",
+        "htmlText":"Doporučení NIST pro TLS"
+    },
+    "DSS": {
+        "description":"Byla použitá slabá autentizace DSS.",
+        "html":"https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final",
+        "htmlText":"Doporučení NIST pro TLS"
+    },
+    "BEAST Útok": {
+        "description":"Byly použitý protokoly TLS 1.0 a starší.",
+        "html":"https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final",
+        "htmlText":"Doporučení NIST pro TLS"
+    },
+    "POODLE Útok": {
+        "description":"Byl použitý protokol SSL 3.0.",
+        "html":"https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final",
+        "htmlText":"Doporučení NIST pro TLS"
+    },
+    "RACCOON Útok": {
+        "description":"Výměna klíče proběhla pomocí DH nebo DHE algoritmu.",
+        "html":"https://raccoon-attack.com",
+        "htmlText":"Informace"
+    },
+    "DROWN Útok": {
+        "description":"Byl použitý protokol SSL 2.0.",
+        "html":"https://drownattack.com",
+        "htmlText":"Informace"
+    },
+    "Logjam Útok": {
+        "description":"Výměna klíče proběhla se slabým šifrováním DHE_EXPORT.",
+        "html":"https://weakdh.org",
+        "htmlText":"Informace"
+    },
+    "CRIME": {
+        "description":"Server používá kompresi.",
+        "html":"https://nvd.nist.gov/vuln/detail/CVE-2012-4929",
+        "htmlText":"CVE-2012-4929 Detail (NIST)"
+    }
+}
+    
