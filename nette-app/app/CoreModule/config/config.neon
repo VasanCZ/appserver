@@ -1,0 +1,8 @@
+#
+# Konfigurační soubor pro CoreModule.
+#
+
+# Nastavení služeb pro CoreModule.
+services:
+    - App\CoreModule\Models\ProtocolsCiphersManager # Vlastní služba dále přístupná pomocí DI.
+ #   - App\CoreModule\Presenters\ProtocolsCiphersPresenter() # Předání nastavení při vytváření služby presenteru.

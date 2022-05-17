@@ -1,0 +1,347 @@
+
+<title>{block title}APP Server{/block}</title>
+{block styles}
+  <link rel="stylesheet" href="{$basePath}/css/bootstrap.css">
+  <link rel="stylesheet" href="{$basePath}/css/style.css">
+{/block}
+
+{block content}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 mx-auto">
+    {control serverForm}
+    </div>
+  </div>
+  
+  {if $success}
+  {if !$online}
+    <p style="text-align:center;">Server nenalezen. Zkuste to znovu nebo později.</p>
+  {else}
+  <div class="row">
+    <div class="col mx-auto">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th colspan=2 class="align-middle text-center">Informace o testu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="w-50 align-middle">Zadané URL serveru:</th>
+            <td class="align-middle">{$url}</td>
+          </tr>
+          <tr>     
+            <th class="align-middle">Datum a čas testování:</th>
+            <td class="align-middle">{$timeNow}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col mx-auto">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th colspan=4 class="align-middle text-center">Legenda</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="align-middle">Dobře zabezpečený</td>
+            <td class="align-middle text-center text-success">A+ (100-95)</td>
+            <td class="align-middle">Částečně zabezpečený</td>
+            <td class="align-middle text-center text-warning">B (79-50)</td>
+          </tr>
+          <tr>     
+            <td class="align-middle">Zabezpečený</td>
+            <td class="align-middle text-center text-success">A (94-80)</td>
+            <td class="align-middle">Zranitelný</td>
+            <td class="align-middle text-center text-danger">C (49-0)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mx-auto">
+      <div class="row">
+        <div class="col mx-auto">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th colspan=2 class="text-center">Informace o certifikátu</th>
+              </tr>
+            </thead>  
+            <tbody>
+            {if $https}
+              {var $first = true}
+              {foreach $subject as $s}
+                {if $first}
+                  <tr> 
+                    <th rowspan={count($subject)} class="text-center align-middle">Subjekt</th>
+                    <td class="align-middle" style="font-size: 80%;">{$s}</td>
+                  </tr>
+                  {$first = false}
+                {else}
+                  <tr>                          
+                    <td class="align-middle" style="font-size: 80%;">{$s}</td>                
+                  </tr>
+                {/if}
+              {/foreach}
+              {var $first = true}
+              {foreach $issuer as $i}
+                {if $first}
+                  <tr>
+                    <th rowspan={count($issuer)} class="text-center align-middle">Vydavatel</th>        
+                    <td class="align-middle" style="font-size: 80%;">{$i}</td>
+                  </tr>
+                {$first = false}
+                {else}
+                  <tr>                          
+                    <td class="align-middle" style="font-size: 80%;">{$i}</td>                
+                  </tr>
+                {/if}
+              {/foreach}
+                <tr>
+                  <th class="text-center align-middle">Secure<br>Renegotiation</th>        
+                  {if $renegotiation}
+                    <td class="text-center align-middle">Bezpečné znovu vyjednávání <span class="text-success">podporuje</span></td>
+                  {else}
+                    <td class="text-center align-middle">Bezpečné znovu vyjednávání <span class="text-danger">nepodporuje</span></td>
+                  {/if}
+                </tr>
+                <tr>
+                  <th class="text-center align-middle">Komprese</th>        
+                    <td class="text-center align-middle text-{$compression_label[$compression]}">{$compression}</td>
+                </tr>
+                <tr>
+                  <th class="text-center align-middle">Veřejný klíč</th>        
+                  <td class="text-center align-middle text-{$keyBits_label[$keyBits]}">{$keyType} {$keyBits} bitů</td>
+                </tr>
+                <tr>
+                  <th class="text-center align-middle">Podpis</th>        
+                  <td class="text-center align-middle text-{$signature_label[$signature]}">{$signature}</td>
+                </tr>
+                <tr>
+                  <th class="text-center align-middle">Platnost od</th>        
+                  <td class="text-center align-middle">{$validFrom}</td>
+                </tr>
+                <tr>
+                  <th class="text-center align-middle">Platnost do</th>        
+                  <td class="text-center align-middle">{$validTo}</td>
+                </tr>
+                <tr>
+                  {if $isValid}
+                    <th colspan=2 class="text-center align-middle text-success">Certifikát je platný</th>   
+                  {else}
+                    <th colspan=2 class="text-center align-middle text-danger">Certifikát je neplatný</th>
+                  {/if}
+                </tr>
+            {else}
+              <tr>
+                <td class="text-center">Žádné informace o certifikátu</td>
+              </tr>
+            {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col mx-auto">
+      <div class="row">
+        <div class="col mx-auto">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th class="text-center">IP adresy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{$dns}</td>
+              </tr>
+              {foreach $ips as $ip}
+                <tr>
+                  <td style="font-size: 80%;">{$ip}</td>
+                </tr>
+              {/foreach} 
+            </tbody>
+          </table>
+        </div>
+        <div class="col mx-auto">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th class="text-center align-middle">Známka</th>
+                <th class="text-center align-middle">Skóre serveru</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              {if $score < 0}
+              <td class="text-center display-3 text-danger">C</td>
+                <td class="text-center display-3 text-danger">0</td>
+              {elseif $score < 50}
+                <td class="text-center display-3 text-danger">C</td>
+                <td class="text-center display-3 text-danger">{$score}</td>
+              {elseif $score < 80}
+                <td class="text-center display-3 text-warning">B</td>
+                <td class="text-center display-3 text-warning">{$score}</td>
+              {else}
+                {if $score < 95}
+                  <td class="text-center display-3 text-success">A</td>
+                {else}
+                  <td class="text-center display-3 text-success">A+</td>
+                {/if}
+                <td class="text-center display-3 text-success">{$score}</td>
+              {/if}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mx-auto">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th class="text-center">Porty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {foreach $ports_only as $port}            
+                <tr>
+                  <td class="text-{$port_labels[$port]}">{$port}</td>
+                </tr>
+              {/foreach} 
+            </tbody>
+          </table>
+        </div>
+        <div class="col col-xl-4 mx-auto">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th class="text-center">Podpora HSTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if $isHsts}          
+                <tr>
+                  <td class="text-center text-success">Ano</td>
+                </tr>
+              {else}
+                <tr>
+                  <td class="text-center text-danger">Ne</td>
+                </tr>
+              {/if}
+            </tbody>
+          </table>
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th class="text-center">Podporované protokoly</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if $https}
+                {foreach $protocols as $prot}
+                  <tr>          
+                    <td class="text-center text-{$prot_labels[$prot]}">{$dic_prot[$prot]}</td>
+                  </tr>
+                {/foreach}
+              {else}
+                <tr>          
+                    <td class="text-center">Žádné</td>
+                </tr>
+              {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col mx-auto">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th class="text-center">Informace o serveru</th>
+          </tr>
+        </thead>
+        <tbody>
+          {foreach $infos as $info}
+            <tr>
+              <td>{$info}</td>
+            </tr>
+          {/foreach} 
+        </tbody>
+      </table>
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th class="text-center w-25">Zranitelnosti</th>
+            <th class="text-center">Doporučení</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ifset $vulnerabilities}
+          {foreach $vulnerabilities as $v}
+            <tr>
+              <td class="align-middle text-center text-danger">{$v}</td>
+              <td class="align-middle" style="font-size: 90%;">
+                <div class="text-center">{$vulnMapping[$v]['description']}</div>
+                <div class="text-center"><a href="{$vulnMapping[$v]['html']}" target="_blank">{$vulnMapping[$v]['htmlText']}</a></div>
+              </td>
+            </tr>
+          {/foreach}
+          {else}
+            <td colspan=2 class=" text-center text-success">Žádné zranitelnosti nebyly detekovány.</td>
+          {/ifset}
+        </tbody>
+      </table>
+    </div>
+    <div class="col mx-auto">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th colspan=2 class="text-center">{$openssl_version} - Cipher suits (IANA)</th>
+          </tr>
+        </thead>  
+        <tbody>
+        {if $https}
+          {foreach $protocols as $prot}
+            {var $first = true}
+            {for $k = 0; $k < count($arrayP); $k++}
+              {var $array_ciphers = array()}
+              {if array_key_exists($prot, $arrayP[$k])}             
+                {if array_push($array_ciphers, $arrayP[$k][$prot])}
+                {/if}
+              {/if}                                     
+              {foreach $array_ciphers as $cipher}
+                {if $first}
+                  <tr>
+                    <th rowspan="{$prot_count[$prot]}" class="text-center align-middle">{$dic_prot[$prot]}</th>          
+                    <td class="text-{$cipher_labels[$cipher]}" style="font-size: 75%;">{$cipher}</td>
+                  </tr>
+                  {$first = false}
+                {else}
+                  <tr>        
+                    <td class="text-{$cipher_labels[$cipher]}" style="font-size: 75%;">{$cipher}</td>
+                  </tr>
+                {/if}
+              {/foreach}
+            {/for}
+          {/foreach}
+        {else}
+          <tr>
+            <td class="text-center">Žádné informace o šifrovacích sad</td>
+          </tr>
+        {/if}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {/if}
+  {/if}
+</div>
+{/block}

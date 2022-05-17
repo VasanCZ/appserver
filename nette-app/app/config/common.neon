@@ -1,0 +1,25 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+
+services:
+	router: App\Router\RouterFactory::createRouter
+
+# Propojení s dalšími konfiguračními soubory.
+includes:
+    - ../CoreModule/config/config.neon # Načtení konfigurace z CoreModule.
